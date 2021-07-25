@@ -3,9 +3,9 @@ import { View } from 'react-native';
 
 import styles from "./styles";
 
-function ListItemSeparator() {
+function ListItemSeparator({ style }) {
   return (
-    <View style={styles.container}></View>
+    <View style={[styles.container, style]}></View>
   );
 }
 

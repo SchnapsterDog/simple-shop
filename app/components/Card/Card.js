@@ -7,15 +7,25 @@ import AppText from '../AppText';
 import colors from "../../config/colors";
 import styles from "./styles";
 
-function Card({ title, subTitle, image, onPress, renderRightActions }) {
+function Card({
+  cardStyle,
+  title,
+  image,
+  imageStyle,
+  IconComponent,
+  subTitle,
+  onPress,
+  renderRightActions,
+}) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={colors.white} onPress={onPress}>
-        <View style={styles.card}>
-          <Image style={styles.image} source={image}></Image>
+        <View style={[styles.card, cardStyle]}>
+          {IconComponent}
+          {image && <Image style={[styles.image, imageStyle]} source={image}></Image>}
           <View style={styles.detailsContainer}>
             <AppText style={styles.title} title={title} />
-            <AppText style={styles.subTitle} title={subTitle} />
+            {subTitle && <AppText style={styles.subTitle} title={subTitle} />}
           </View>
         </View>
       </TouchableHighlight>

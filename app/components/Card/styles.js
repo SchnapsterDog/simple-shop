@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
     height: 200
   },
   detailsContainer: {
-    padding: 20
+    padding: 20,
+    justifyContent: 'center'
   },
   subTitle: {
     color: colors.secondary,
