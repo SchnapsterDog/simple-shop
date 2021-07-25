@@ -11,6 +11,8 @@ import initialCollection from '../static/collections';
 
 function ListingDetailsScreen(props) {
   const [collections, setCollections] = useState(initialCollection);
+  const [refreshing, setRefreshing] = useState(false);
+
   const handleDelete = (item) => {
     setCollections(collections.filter((i) => i.id !== item.id));
   };
@@ -33,6 +35,8 @@ function ListingDetailsScreen(props) {
           />
         )}
         ItemSeparatorComponent={ListItemSeparator}
+        refreshing={refreshing}
+        onRefresh={() => setCollections(initialCollection)}
       />
     </Screen>
   );
