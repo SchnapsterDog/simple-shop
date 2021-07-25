@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 
 import Card from "../components/Card";
 import Screen from "../components/Screen";
-import collections from "../static/collections";
+import ListItemSeparator from "../components/ListItemSeparator";
+import ListItemDeleteAction from "../components/ListItemDeleteAction";
+
+import initialCollection from '../static/collections';
 
 function ListingDetailsScreen(props) {
-  const onPress = (item) => console.log(item) 
+  const [collections, setCollections] = useState(initialCollection);
+  const handleDelete = (item) => {
+    setCollections(collections.filter((i) => i.id !== item.id));
+  };
+  const onPress = (item) => console.log(item);
+
   return (
     <Screen style={styles.container}>
       <FlatList
@@ -19,8 +27,12 @@ function ListingDetailsScreen(props) {
             subTitle={item.subTitle}
             image={item.image}
             onPress={() => onPress(item)}
+            renderRightActions={() => (
+              <ListItemDeleteAction onPress={() => handleDelete(item)} />
+            )}
           />
         )}
+        ItemSeparatorComponent={ListItemSeparator}
       />
     </Screen>
   );
@@ -31,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f4f4",
     padding: 20,
     paddingTop: 100,
-  },
+  }
 });
 
 export default ListingDetailsScreen;

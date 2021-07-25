@@ -1,21 +1,25 @@
 import React from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { Image, TouchableHighlight, View } from 'react-native';
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import AppText from '../AppText';
 
+import colors from "../../config/colors";
 import styles from "./styles";
 
-function Card({ title, subTitle, image, onPress}) {
+function Card({ title, subTitle, image, onPress, renderRightActions }) {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.card}>
-        <Image style={styles.image} source={image}></Image>
-        <View style={styles.detailsContainer}>
-          <AppText style={styles.title} title={title} />
-          <AppText style={styles.subTitle} title={subTitle} />
+    <Swipeable renderRightActions={renderRightActions}>
+      <TouchableHighlight underlayColor={colors.white} onPress={onPress}>
+        <View style={styles.card}>
+          <Image style={styles.image} source={image}></Image>
+          <View style={styles.detailsContainer}>
+            <AppText style={styles.title} title={title} />
+            <AppText style={styles.subTitle} title={subTitle} />
+          </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableHighlight>
+    </Swipeable>
   );
 }
 
