@@ -3,19 +3,28 @@ import React, { useState }from 'react';
 import { Text } from 'react-native';
 
 import Screen from '../components/Screen';
+import AppPicker from '../components/AppPicker';
 import AppTextInput from '../components/AppTextInput';
+
+import colors from '../config/colors';
 
 function LoginScreen(props) {
   const [firstName, setFirstName] = useState("");
   return (
     <Screen>
-      <Text>{firstName}</Text>
+      <AppPicker
+        iconName="apps"
+        iconSize={40}
+        iconColor={colors.medium}
+        iconBackgroundColor={colors.light}
+        placeholder="Category"
+      />
       <AppTextInput
         iconName="email"
         iconSize={40}
-        iconColor="#a8a8a8"
-        iconBackgroundColor="#f8f4f4"
-        placeholder="User Name"
+        iconColor={colors.medium}
+        iconBackgroundColor={colors.light}
+        placeholder="Email"
         secureTextEntry
         clearButtonMode="never"
         maxLength={10}
