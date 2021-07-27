@@ -4,8 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import AppButton from '../components/AppButton';
-import AppTextInput from '../components/AppTextInput';
-import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
+import AppFormField from '../components/AppFormField';
 import Screen from '../components/Screen';
 
 import colors from '../config/colors';
@@ -32,22 +31,21 @@ function LoginScreen(props) {
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        {({ handleChange, handleSubmit, errors }) => (
+        {({ handleSubmit }) => (
           <>
-            <AppTextInput
+            <AppFormField
               autoCapitalize="none"
               autoCorrect={false}
-              keyboardType="email-address"
               iconName="email"
               iconSize={40}
               iconColor={colors.medium}
               iconBackgroundColor={colors.light}
-              onChangeText={handleChange("email")}
+              keyboardType="email-address"
+              name="email"
               placeholder="Email"
               textContentType="emailAddress"
             />
-            <ErrorMessage error={errors.email} />
-            <AppTextInput
+            <AppFormField
               autoCapitalize="none"
               autoCorrect={false}
               clearButtonMode="never"
@@ -55,12 +53,11 @@ function LoginScreen(props) {
               iconSize={40}
               iconColor={colors.medium}
               iconBackgroundColor={colors.light}
-              onChangeText={handleChange("password")}
+              name="password"
               placeholder="Password"
               secureTextEntry={true}
               textContentType="password"
             />
-            <ErrorMessage error={errors.password} />
             <AppButton title="Login" onPress={handleSubmit} />
           </>
         )}
