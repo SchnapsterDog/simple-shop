@@ -1,41 +1,64 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
-import Screen from '../components/Screen';
-import AppPicker from '../components/AppPicker';
+import { Image, StyleSheet } from 'react-native';
+import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 
+import Screen from '../components/Screen';
+
 import colors from '../config/colors';
-import categories from '../static/categories';
 
 function LoginScreen(props) {
-  const [firstName, setFirstName] = useState("");
-  const [category, setCategory] = useState(categories[0]);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   return (
-    <Screen>
-      <AppPicker
-        selectedItem={category}
-        onSelectItem={item => setCategory(item)}
-        items={categories}
-        iconName="apps"
-        iconSize={40}
-        iconColor={colors.medium}
-        iconBackgroundColor={colors.light}
-        placeholder="Category"
+    <Screen style={styles.container}>
+      <Image
+        source={require("../assets/images/icon.png")}
+        style={styles.logo}
       />
       <AppTextInput
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="email-address"
         iconName="email"
         iconSize={40}
         iconColor={colors.medium}
         iconBackgroundColor={colors.light}
+        onChangeText={(text) => setEmail(text)}
         placeholder="Email"
-        secureTextEntry
-        clearButtonMode="never"
-        maxLength={10}
-        onChangeText={(text) => setFirstName(text)}
+        textContentType="emailAddress"
       />
+      <AppTextInput
+        autoCapitalize="none"
+        autoCorrect={false}
+        clearButtonMode="never"
+        iconName="lock"
+        iconSize={40}
+        iconColor={colors.medium}
+        iconBackgroundColor={colors.light}
+        onChangeText={(password) => setPassword(password)}
+        placeholder="Password"
+        secureTextEntry={true}
+        textContentType="password"
+      />
+      <AppButton title="Login" onPress={() => console.log(email, password)} />
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10
+  },
+  logo: {
+    width: 80,
+    height: 80,
+    alignSelf: 'center',
+    marginTop: 50,
+    marginBottom: 20
+  }
+})
 
 export default LoginScreen;
