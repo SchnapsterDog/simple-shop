@@ -1,11 +1,11 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import AppButton from '../components/AppButton';
+import AppForm from '../components/AppForm';
 import AppFormField from '../components/AppFormField';
 import Screen from '../components/Screen';
+import SubmitButton from '../components/SubmitButton';
 
 import colors from '../config/colors';
 
@@ -23,7 +23,7 @@ function LoginScreen(props) {
         style={styles.logo}
       />
 
-      <Formik
+      <AppForm
         initialValues={{
           email: "",
           password: "",
@@ -31,37 +31,33 @@ function LoginScreen(props) {
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        {({ handleSubmit }) => (
-          <>
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              iconName="email"
-              iconSize={40}
-              iconColor={colors.medium}
-              iconBackgroundColor={colors.light}
-              keyboardType="email-address"
-              name="email"
-              placeholder="Email"
-              textContentType="emailAddress"
-            />
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              clearButtonMode="never"
-              iconName="lock"
-              iconSize={40}
-              iconColor={colors.medium}
-              iconBackgroundColor={colors.light}
-              name="password"
-              placeholder="Password"
-              secureTextEntry={true}
-              textContentType="password"
-            />
-            <AppButton title="Login" onPress={handleSubmit} />
-          </>
-        )}
-      </Formik>
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          iconName="email"
+          iconSize={40}
+          iconColor={colors.medium}
+          iconBackgroundColor={colors.light}
+          keyboardType="email-address"
+          name="email"
+          placeholder="Email"
+          textContentType="emailAddress"
+        />
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          clearButtonMode="never"
+          iconName="lock"
+          iconSize={40}
+          iconColor={colors.medium}
+          iconBackgroundColor={colors.light}
+          name="password"
+          placeholder="Password"
+          secureTextEntry={true}
+          textContentType="password"
+        />
+        <SubmitButton title="Login" />
+      </AppForm>
     </Screen>
   );
 }
