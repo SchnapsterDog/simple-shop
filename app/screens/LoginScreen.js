@@ -1,41 +1,82 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Image, StyleSheet } from 'react-native';
+import * as Yup from 'yup';
 
+import AppForm from '../components/AppForm';
+import AppFormField from '../components/AppFormField';
 import Screen from '../components/Screen';
-import AppPicker from '../components/AppPicker';
-import AppTextInput from '../components/AppTextInput';
+import SubmitButton from '../components/SubmitButton';
 
 import colors from '../config/colors';
-import categories from '../static/categories';
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required().email().label('Email'),
+  password: Yup.string().required().min(4).label('Password')
+})
 
 function LoginScreen(props) {
-  const [firstName, setFirstName] = useState("");
-  const [category, setCategory] = useState(categories[0]);
 
   return (
-    <Screen>
-      <AppPicker
-        selectedItem={category}
-        onSelectItem={item => setCategory(item)}
-        items={categories}
-        iconName="apps"
-        iconSize={40}
-        iconColor={colors.medium}
-        iconBackgroundColor={colors.light}
-        placeholder="Category"
+    <Screen style={styles.container}>
+      <Image
+        source={require("../assets/images/icon.png")}
+        style={styles.logo}
       />
-      <AppTextInput
-        iconName="email"
-        iconSize={40}
-        iconColor={colors.medium}
-        iconBackgroundColor={colors.light}
-        placeholder="Email"
-        secureTextEntry
-        clearButtonMode="never"
-        maxLength={10}
-        onChangeText={(text) => setFirstName(text)}
-      />
+
+      <AppForm
+        initialValues={{
+          email: "",
+          password: "",
+        }}
+        onSubmit={(values) => console.log(values)}
+        validationSchema={validationSchema}
+      >
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          iconName="email"
+          iconSize={40}
+          iconColor={colors.medium}
+          iconBackgroundColor={colors.light}
+          keyboardType="email-address"
+          name="email"
+          placeholder="Email"
+          textContentType="emailAddress"
+        />
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          clearButtonMode="never"
+          iconName="lock"
+          iconSize={40}
+          iconColor={colors.medium}
+          iconBackgroundColor={colors.light}
+          name="password"
+          placeholder="Password"
+          secureTextEntry={true}
+          textContentType="password"
+        />
+        <SubmitButton title="Login" />
+      </AppForm>
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  logo: {
+    width: 80,
+    height: 80,
+    alignSelf: "center",
+    marginTop: 50,
+    marginBottom: 20,
+  },
+  validation: {
+    fontSize: 14,
+    color: colors.danger
+  },
+});
 
 export default LoginScreen;
