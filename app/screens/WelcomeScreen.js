@@ -4,9 +4,9 @@ import { Image, ImageBackground, StyleSheet, View } from "react-native";
 import AppText from "../components/AppText";
 import AppButton from "../components/AppButton";
 
-function WelcomeScreen(props) {
-  const onLogin = () => alert("Login");
-  const onRegister = () => alert("Register");
+function WelcomeScreen({ navigation }) {
+  const onLogin = () => navigation.navigate('Login');
+  const onRegister = () => navigation.navigate('Register');
 
   return (
     <ImageBackground

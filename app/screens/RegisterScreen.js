@@ -1,23 +1,21 @@
-import React from 'react';
-import { Image, StyleSheet } from 'react-native';
-import * as Yup from 'yup';
+import React from "react";
+import { Image, StyleSheet } from "react-native";
+import * as Yup from "yup";
 
-import AppForm from '../components/AppForm';
-import AppFormField from '../components/AppFormField';
-import Screen from '../components/Screen';
-import SubmitButton from '../components/SubmitButton';
+import AppForm from "../components/AppForm";
+import AppFormField from "../components/AppFormField";
+import Screen from "../components/Screen";
+import SubmitButton from "../components/SubmitButton";
 
-import colors from '../config/colors';
+import colors from "../config/colors";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label('Email'),
-  password: Yup.string().required().min(4).label('Password')
-})
+  email: Yup.string().required().email().label("Email"),
+  password: Yup.string().required().min(4).label("Password"),
+});
 
-function LoginScreen(props) {
-  const onLogin = (values) => console.log(values);
-
-  return (    
+function RegisterScreen(props) {
+  return (
     <Screen style={styles.container}>
       <Image
         source={require("../assets/images/icon.png")}
@@ -29,7 +27,7 @@ function LoginScreen(props) {
           email: "",
           password: "",
         }}
-        onSubmit={(values) => onLogin(values)}
+        onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
         <AppFormField
@@ -76,8 +74,8 @@ const styles = StyleSheet.create({
   },
   validation: {
     fontSize: 14,
-    color: colors.danger
+    color: colors.danger,
   },
 });
 
-export default LoginScreen;
+export default RegisterScreen;

@@ -1,5 +1,5 @@
 export default {
-  primary: "#fc5c65",
+  primary: "dodgerblue",
   secondary: "#4ecdc4",
   borderPrimary: "#fc5c85",
   borderSecondary: "#4ecde4",

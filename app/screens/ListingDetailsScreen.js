@@ -7,16 +7,17 @@ import Screen from "../components/Screen";
 import ListItemSeparator from "../components/ListItemSeparator";
 import ListItemDeleteAction from "../components/ListItemDeleteAction";
 
+import routes from '../navigation/routes';
 import initialCollection from '../static/collections';
 
-function ListingDetailsScreen(props) {
+function ListingDetailsScreen({ navigation }) {
   const [collections, setCollections] = useState(initialCollection);
   const [refreshing, setRefreshing] = useState(false);
 
   const handleDelete = (item) => {
     setCollections(collections.filter((i) => i.id !== item.id));
   };
-  const onPress = (item) => console.log(item);
+  const onPress = (item) => navigation.navigate(routes.VIEW_IMAGE, item);
 
   return (
     <Screen style={styles.container}>
